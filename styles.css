@@ -171,11 +171,9 @@ html, body {
 .sky-scene,
 .horizon-foreground {
   position: fixed;
-  /* Extends 10% past the top and bottom of the viewport (120% total height) */
-  top: -10vh;
-  left: 0;
-  width: 100vw;
-  height: 120vh; 
+  inset: 0;
+  width: 100%;
+  height: 100%;
   
   background-image: linear-gradient(180deg, rgba(14, 55, 83, 0.04), rgba(14, 55, 83, 0.19)), url("assets/horizon-background.png");
   background-size: cover;
