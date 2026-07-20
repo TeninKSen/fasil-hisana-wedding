@@ -72,9 +72,14 @@ document.querySelectorAll('.reveal').forEach(section => observer.observe(section
 // Fixed comet scroll mechanic
 let cometTicking = false;
 
+// Replace moveComet in script.js
+
 function moveComet() {
-  const scrollableDistance = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-  const progress = Math.min(1, window.scrollY / scrollableDistance);
+  const wrapper = document.querySelector('.story-wrapper');
+  if (!wrapper) return;
+
+  const scrollableDistance = Math.max(1, wrapper.scrollHeight - wrapper.clientHeight);
+  const progress = Math.min(1, wrapper.scrollTop / scrollableDistance);
   
   const percentage = (progress * 100).toFixed(1) + '%';
   
@@ -86,10 +91,17 @@ function moveComet() {
   cometTicking = false;
 }
 
-window.addEventListener('scroll', () => {
-  if (!cometTicking) {
-    requestAnimationFrame(moveComet);
-    cometTicking = true;
+// Listen to scroll events on .story-wrapper instead of window
+document.addEventListener('DOMContentLoaded', () => {
+  const wrapper = document.querySelector('.story-wrapper');
+  if (wrapper) {
+    wrapper.addEventListener('scroll', () => {
+      if (!cometTicking) {
+        requestAnimationFrame(moveComet);
+        cometTicking = true;
+      }
+    }, { passive: true });
   }
-}, { passive: true });
+});
+
 moveComet();
