@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#62a7d3" />
+    <meta name="description" content="Fasil & Hisana invite you to witness the beginning of their forever." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Fasil & Hisana — Wedding Invitation" />
+    <meta property="og:description" content="Join us for a celebration of a love written in the stars." />
+    <meta property="og:image" content="assets/share-preview.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />   
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=Italiana&family=Fleur+De+Leah&family=Moon+Dance&family=Bilbo&family=Tangerine:wght@400;700&family=Charm:wght@400&family=Noto+Serif+KR:wght@200..900&display=swap" rel="stylesheet" />    
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="elegant-colors.css" />
+    <title>Fasil & Hisana | Wedding Invitation</title>
+  </head>
+  <body>
+   <div class="cover" id="cover" role="button" tabindex="0" aria-label="Open wedding invitation">
+      <div class="cover-bg"></div>
+      <p class="cover-top-text">Wedding<br>Invitation</p>      
+      <div class="cover-center-action">
+        <span class="pulse-text">Touch to Open</span>
+      </div>
+      <p class="cover-bottom-names">Fasil <b>&amp;</b> Hisana</p>
+    </div>
+
+    <main id="invitation" aria-hidden="true">
+      <div class="sky-scene" aria-hidden="true"></div>
+      <div class="comet" id="comet" aria-hidden="true"></div>
+      <div class="horizon-foreground" aria-hidden="true"></div>
+      <div class="story">
+        <section class="hero content-block">
+          <div class="bismillah-wrap">
+            <img src="assets/bismillah.png" alt="Bismillah" class="bismillah-img" />
+          </div>
+          <p class="descrip">"We are getting married"</p>
+          <h1>Fasil <i>&</i> Hisana</h1>
+          <p class="descrip">we are delighted to invite you to<br>celebrate our wedding</p>
+          <p class="scroll-hint">Scroll to follow our story <span>↓</span></p>
+        </section>
+
+        <section class="message content-block reveal">          
+          <blockquote>“Two Souls, One Destiny.<br>A Lifetime written by Allah”</blockquote>
+          <p>Dear Friends & Family,<br>Join us for an evening of love, laughter, duas, and<br>unforgettable memories as we begin our Forever</p>
+        </section>
+
+        <section class="date content-block reveal">
+          <p class="eyebrow">Save this day</p>
+          <div class="date-line"><span>Saturday</span><strong>29</strong><span>August<br />2026</span></div>
+          <p class="time">4 P.M. Onwards</p>
+        </section>        
+
+        <section class="venue content-block reveal">
+          <p class="eyebrow">Where our story unfolds</p>
+          <h2>Grand View Convention Center</h2>
+          <p class="venue-address">Chattipparamba<br>Malappuram</p>
+          <a class="map-button" id="map-link" href="#" target="_blank" rel="noopener">View location ↗</a>
+        </section>    
+
+	<section class="countdown-section content-block reveal">
+          <p class="eyebrow">The Celebration Begins In</p>
+          <div class="countdown" aria-label="Countdown to wedding date">
+            <div><b id="days">00</b><span>Days</span></div>
+            <div><b id="hours">00</b><span>Hours</span></div>
+            <div><b id="minutes">00</b><span>Mins</span></div>
+            <div><b id="seconds">00</b><span>Secs</span></div>
+          </div>
+        </section>    			
+
+        <footer class="content-block">          
+          <img src="assets/insha_allah.png" alt="insha_allah" class="bismillah-img" />          
+        </footer>
+      </div>
+    </main>
+
+    <button class="music-button" id="music-button" type="button" aria-label="Play background music" aria-pressed="false"><span>♪</span><i>Sound on</i></button>
+    <audio id="background-music" loop preload="none"><source src="assets/background-music.mp3" type="audio/mpeg" /></audio>
+    <script src="script.js"></script>
+  </body>
+</html>

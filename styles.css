@@ -1,0 +1,511 @@
+:root {
+  --sky: #67aeda;
+  --navy: #173e5a;
+  --deep: #102e46;
+  --cream: #fff6e4;
+  --gold: #e5bf77;
+  --sans: "DM Sans", sans-serif;
+  --serif: "DM Serif Display", serif;
+  --display: "Italiana", serif; 
+  --tangerine: "Tangerine", cursive; 
+  --charm: "Charm", cursive;
+  --fleur: "Fleur De Leah", cursive;
+  --bilbo: 'Bilbo', serif; 
+  --noto: "Noto Serif KR", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: #66abda;
+  color: var(--cream);
+  font: 15px/1.65 var(--charm);
+}
+
+/* ==========================================================================
+   IMMERSIVE CLOUD BLEND-IN COVER
+   ========================================================================== */
+.cover {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20vh 20px 10vh;
+  overflow: hidden;
+  cursor: pointer;
+  background: #66abda; /* Matches the scene background during fade */
+  
+  /* Transition handles the fade out and visibility switch */
+  transition: opacity 3s cubic-bezier(0.4, 0, 0.2, 1), 
+              visibility 5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cover-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("assets/envelope.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Scaled baseline to allow room for the immersive zoom forward */
+  transform: scale(1);
+  transition: transform 10s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Triggers the cloud entrance immersion sequence */
+.cover.open {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Zooms the cloud layer forward deep into the viewport when clicked */
+.cover.open .cover-bg {
+  transform: scale(5);
+}
+
+.cover-top-text {
+  margin: 0;
+  text-transform: none; /* Keeps script fluid */
+  font-size: clamp(36px, 15vw, 48px); /* Boosted size slightly since cursive fonts run small */  
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.05em; /* Keeps loops tightly connected */
+  color: #e2ceb1;
+  text-shadow: 0 2px 10px rgba(16, 46, 70, 0.4);
+  text-align: center;
+  transition: opacity 0.6s ease;
+
+  /* Capitalized the D and L here */
+  font-family: var(--fleur); 
+}
+
+.cover-center-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(12vh);
+}
+
+.pulse-text {
+  font-size: clamp(13px, 2.5vw, 15px);
+  letter-spacing: 0.2em;
+  color: #fffdec;
+  background: rgba(23, 62, 90, 0.2);
+  padding: 10px 22px;
+  border-radius: 99px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: dynamicPulse 2.2s infinite ease-in-out;
+  transition: opacity 0.6s ease;
+}
+
+/* Fades text elements out faster than the background for a cleaner blend */
+.cover.open .cover-top-text,
+.cover.open .pulse-text,
+.cover.open .cover-bottom-names {
+  opacity: 0;
+}
+
+@keyframes dynamicPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+}
+
+.cover-bottom-names {
+  margin: 0;
+  text-transform: none; /* Keeps script fluid */
+  font-size: clamp(36px, 10vw, 48px); /* Boosted size slightly since cursive fonts run small */
+  letter-spacing: 0.02em; /* Keeps loops tightly connected */
+  color: #e2ceb1;
+  text-shadow: 0 2px 10px rgba(16, 46, 70, 0.4);
+  transition: opacity 0.6s ease;
+  
+  font-family: 'Moon Dance', cursive;
+}
+
+.cover-bottom-names b {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.85em;
+  padding: 0 4px;
+}
+
+/* ==========================================================================
+   BACKGROUND & MAIN CONTENT
+   ========================================================================== */
+.sky-scene,
+.horizon-foreground {
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(180deg, rgba(14, 55, 83, 0.04), rgba(14, 55, 83, 0.19)), url("assets/horizon-background.png");
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
+
+.sky-scene {
+  z-index: 0;
+}
+
+.horizon-foreground {
+  z-index: 2;
+  pointer-events: none;
+  clip-path: inset(76% 0 0 0);
+}
+
+.story {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: auto;
+}
+
+.content-block {
+  min-height: 50svh;
+  padding: 20px 29px 18vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: center;
+  text-shadow: 0 2px 11px rgba(17, 57, 76, 0.5);
+}
+
+.hero {
+  justify-content: center;
+  padding-top: 12vh;
+  padding-bottom: 8vh;
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  text-transform: uppercase;
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  color: #fff9ea;
+}
+
+.hero h1 {
+  margin: 0;
+  font: 600 clamp(55px, 16vw, 84px)/0.78 var(--bilbo);
+  letter-spacing: 0.02em;  
+}
+
+.descrip {
+  margin: 0 0 18px;
+  font-size: clamp(22px, 4vw, 32px);
+  letter-spacing: 0.02em;  
+  font-weight: 400;
+  max-width: 430px;
+}
+
+.hero h1 i,
+footer i {
+  font: italic 0.53em var(--serif);
+  vertical-align: middle;
+  color: var(--gold);
+}
+
+.hero-copy {
+  max-width: 260px;
+  margin: 30px auto 0;
+  font-size: clamp(20px, 10vw, 30px);
+  font-family: "Tangerine", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.scroll-hint {
+  margin: 40px 0 0;
+  text-transform: uppercase;
+  font-size: clamp(10px, 2.5vw, 15px);
+  letter-spacing: 0.2em;
+}
+
+.scroll-hint span {
+  display: block;
+  margin-top: 11px;
+  font-size: 16px;
+  animation: bob 1.8s infinite;
+}
+
+@keyframes bob {
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.message {
+  justify-content: flex-end;
+  padding-bottom: 15vh;
+}
+
+.message blockquote {
+  max-width: 440px;
+  margin: 0 auto 24px;
+  font: italic clamp(40px, 10vw, 55px)/1.32 var(--serif);
+}
+
+.message > p:last-child {
+  max-width: 430px;
+  margin: 0 auto;
+  font-size: clamp(22px, 4vw, 32px);
+  letter-spacing: 0.02em; 
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+
+.date {
+  justify-content: flex-end;
+  padding-bottom: 17vh;
+}
+
+.date-line {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  max-width: 400px;
+  margin: 11px auto 0;
+  padding: 17px 0;
+  border-top: 1px solid rgba(255, 250, 231, 0.72);
+  border-bottom: 1px solid rgba(255, 250, 231, 0.72);
+}
+
+.date-line span {
+  font-size: clamp(24px, 20vw, 28px);
+  font-family: "Italiana", serif;
+  line-height: 1.4;
+  letter-spacing: 0em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.date-line span:first-child {
+  text-align: right;
+}
+
+.date-line strong {
+  font: 500 76px/.82 var(--display);
+}
+
+.time {
+  margin: 20px 0 0;
+  font-size: clamp(22px, 5vw, 32px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+}
+
+.time b {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 9px;
+}
+
+.countdown-section {
+  justify-content: flex-end;
+  padding-bottom: 18vh;
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  max-width: 400px;
+  margin: 10px auto 0;
+}
+
+.countdown div {
+  width: 90%; /* Shrinks the element width so borders don't stretch fully */
+  margin: 0 auto;
+  padding: 13px 2px;
+  border-top: 1px solid rgba(255, 248, 225, 0.8);
+  border-bottom: 1px solid rgba(255, 248, 225, 0.8);
+}
+
+.countdown b {
+  display: block;
+  font: 600 clamp(48px, 12vw, 65px)/0.9 var(--noto);
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown span {
+  display: block;
+  margin-top: 9px;
+  text-transform: uppercase;
+  font-size: clamp(15px, 2vw, 17px);
+  font-family: var(--noto);
+  letter-spacing: 0.13em;
+}
+
+.venue {
+  justify-content: flex-end;
+  padding-bottom: 17vh;
+}
+
+.venue h2 {
+  margin: 0;
+  font: 700 clamp(48px, 14vw, 65px)/0.9 var(--display);
+}
+
+.venue-address {
+  margin: 17px 0 28px;  
+  font-size: clamp(22px, 6vw, 32px);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+}
+
+.venue-address span {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.map-button {
+  align-self: center;
+  display: inline-block;
+  padding: 10px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.35);  
+  border-radius: 99px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: dynamicPulse 2.2s infinite ease-in-out;
+  backdrop-filter: blur(4px);
+  color: #fffbed;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: clamp(13px, 2.5vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+ 
+
+.map-button span {
+  font-size: 15px;
+  margin-left: 8px;
+}
+
+footer {
+  display: flex; /* Ensures alignment properties take effect */
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  
+  /* Give the footer container enough room to breathe */
+  min-height: 50svh;     
+  
+  /* Pushes the text elements inside it 60px higher up the screen */
+  transform: translateY(-60px); 
+}
+
+footer p {
+  margin: 0;
+  font: italic 19px var(--serif);
+}
+
+footer strong {
+  display: block;
+  margin: 10px 0 22px;
+  font: 500 41px var(--display);
+}
+
+footer small {
+  font-size: 8px;
+  letter-spacing: 0.21em;
+}
+
+/* ==========================================================================
+   AUDIO TOGGLE SYSTEM
+   ========================================================================== */
+.music-button {
+  position: fixed;
+  z-index: 10;
+  right: 15px;
+  bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 250, 231, 0.65);
+  border-radius: 99px;
+  background: rgba(37, 94, 127, 0.37);
+  backdrop-filter: blur(8px);
+  color: #fffef6;
+  font: 9px var(--sans);
+  letter-spacing: 0.09em;
+  cursor: pointer;
+}
+
+.music-button span {
+  font-size: 16px;
+}
+
+.music-button.playing span {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.3;
+    transform: scale(0.7);
+  }
+}
+
+/* ==========================================================================
+   INTERSECTION ANIMATIONS & RESPONSIVE DESIGN
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(18vh);
+  transition: opacity 1s ease, transform 1s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (min-width: 600px) {
+  .content-block {
+    padding-left: 65px;
+    padding-right: 65px;
+  }
+  .horizon-foreground {
+    clip-path: inset(72% 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

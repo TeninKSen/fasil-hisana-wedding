@@ -1,0 +1,76 @@
+/* Warm champagne lettering against the blue sky */
+:root {
+  --cream: #e2ceb1;
+  --gold: #e7bd73;
+}
+
+.eyebrow,
+.map-button {
+  color: #f1d39c;
+}
+
+.date-line {
+  border-color: rgba(246, 220, 172, 0.72);
+}
+
+.countdown div {
+  border-color: rgba(246, 220, 172, 0.8);
+}
+
+.comet {
+  --comet-progress: 0%; 
+  position: fixed;       
+  z-index: 2;            
+  bottom: 25vh;          
+  left: 0vw;             
+  width: 150vw;          
+  height: 3px;           
+  pointer-events: none;
+  
+  transform: rotate(-45deg);
+  transform-origin: left center;
+
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent calc(var(--comet-progress) - 30%),
+    rgba(255, 239, 194, 0.15) calc(var(--comet-progress) - 12%),
+    rgba(255, 239, 194, 0.6) calc(var(--comet-progress) - 5%),
+    rgba(255, 228, 171, 0.9) calc(var(--comet-progress) - 1%),
+    #ffe8b0 var(--comet-progress),
+    transparent var(--comet-progress)
+  );
+  
+  will-change: background;
+}
+
+.bismillah {
+  font-family: 'Amiri', serif;
+  font-size: clamp(24px, 5vw, 32px); /* Makes it responsive and beautifully legible */
+  font-weight: 700;
+  font-style: italic; /* Gives it a slight, elegant cursive slant */
+  direction: rtl;     /* Ensures proper Arabic text rendering */
+  margin: 0 0 15px 0;
+  color: var(--gold); /* Matches your elegant gold scheme */
+  opacity: 0.95;
+  text-shadow: 0 2px 8px rgba(17, 57, 76, 0.4);
+}
+
+.bismillah-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.bismillah-img {
+  max-width: 180px; /* Limits the size so it stays elegant */
+  width: 50%;       /* Makes it responsive on smaller screens */
+  height: auto;
+  display: block; 
+
+  
+  /* Optional: Adds a soft glow behind the script to pop against the sky background */
+  filter: drop-shadow(0 2px 8px rgba(231, 189, 115, 0.3)); 
+  
+}
