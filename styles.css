@@ -20,11 +20,13 @@
 
 html {
   scroll-behavior: smooth;
+  overscroll-behavior-y: none;
 }
 
 body {
   margin: 0;
   overflow-x: hidden;
+  overscroll-behavior-y: none; /* Keeps view stable */
   background: #66abda;
   color: var(--cream);
   font: 15px/1.65 var(--charm);
@@ -185,7 +187,7 @@ body {
 }
 
 .content-block {
-  min-height: 50svh;
+  min-height: 50dvh;
   padding: 20px 29px 18vh;
   display: flex;
   flex-direction: column;
@@ -417,7 +419,7 @@ footer {
   align-items: center;
   
   /* Give the footer container enough room to breathe */
-  min-height: 50svh;     
+  min-height: 50dvh; /* Changed from 50svh to 50dvh */   
   
   /* Pushes the text elements inside it 60px higher up the screen */
   transform: translateY(-60px); 
