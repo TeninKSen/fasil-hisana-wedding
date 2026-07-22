@@ -102,6 +102,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { passive: true });
   }
+  if (wrapper) {
+    // Prevents touch-drag leaking to Android Chrome address bar
+    wrapper.addEventListener('touchmove', (e) => {
+      e.stopPropagation();
+    }, { passive: true });
+  }
 });
 
 moveComet();
