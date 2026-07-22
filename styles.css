@@ -172,12 +172,18 @@ html, body {
 /* ==========================================================================
    BACKGROUND & MAIN CONTENT
    ========================================================================== */
+main {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+}
+
 .sky-scene,
 .horizon-foreground {
-  position: fixed;
+  position: absolute;
   inset: 0;
   width: 100%;
-  height: 100lvh;
+  height: var(--app-height);
   
   background-image: linear-gradient(180deg, rgba(14, 55, 83, 0.04), rgba(14, 55, 83, 0.19)), url("assets/horizon-background.png");
   background-size: cover;

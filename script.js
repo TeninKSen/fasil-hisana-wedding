@@ -113,15 +113,24 @@ document.addEventListener('DOMContentLoaded', () => {
 moveComet();
 
 
-// Lock background height to physical pixels to eliminate Chrome Android viewport jumping
-function lockBackgroundHeight() {
-  const h = window.innerHeight;
-  const sky = document.querySelector('.sky-scene');
-  const horizon = document.querySelector('.horizon-foreground');
-  
-  if (sky) sky.style.height = `${h}px`;
-  if (horizon) horizon.style.height = `${h}px`;
+function updateViewportHeight() {
+    const vh = window.visualViewport
+        ? window.visualViewport.height
+        : window.innerHeight;
+
+    document.documentElement.style.setProperty(
+        '--app-height',
+        `${vh}px`
+    );
 }
 
-// Run once when page loads
-window.addEventListener('load', lockBackgroundHeight);
+updateViewportHeight();
+
+window.addEventListener('resize', updateViewportHeight);
+
+if (window.visualViewport) {
+    window.visualViewport.addEventListener(
+        'resize',
+        updateViewportHeight
+    );
+}
