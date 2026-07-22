@@ -1,8 +1,11 @@
 // Edit these details when your wedding arrangements are final.
 const WEDDING = {
-  date: '2026-08-29T16:00:00+05:30',
-  // TODO: Replace the '#' below with your actual Google Maps share link
-  mapUrl: 'https://maps.app.goo.gl/w2nGKJNwymkxXnYU6?g_st=ic', 
+  date: '2026-08-29T16:00:00+05:30', 
+  endDate: '2026-08-29T20:00:00+05:30', 
+  mapUrl: 'https://maps.app.goo.gl/w2nGKJNwymkxXnYU6?g_st=ic',
+  title: 'Fasil & Hisana Wedding',
+  location: 'Grand View Convention Center, Chattipparamba, Malappuram',
+  description: 'Join us in celebrating the wedding of Fasil & Hisana.' 
 };
 
 const cover = document.querySelector('#cover');
@@ -16,9 +19,9 @@ async function playMusic() {
     await music.play();
     musicButton.classList.add('playing');
     musicButton.setAttribute('aria-pressed', 'true');
-    musicButton.querySelector('i').textContent = 'Pause';
+    musicButton.querySelector('t').textContent = '🔇';
   } catch {
-    musicButton.querySelector('i').textContent = 'Sound on';
+    musicButton.querySelector('t').textContent = '🔈';
   }
 }
 
@@ -57,7 +60,7 @@ musicButton.addEventListener('click', async () => {
     music.pause();
     musicButton.classList.remove('playing');
     musicButton.setAttribute('aria-pressed', 'false');
-    musicButton.querySelector('i').textContent = 'Sound on';
+    musicButton.querySelector('t').textContent = '🔈';
   }
 });
 
@@ -101,13 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cometTicking = true;
       }
     }, { passive: true });
-  }
-  if (wrapper) {
-    // Prevents touch-drag leaking to Android Chrome address bar
-    wrapper.addEventListener('touchmove', (e) => {
-      e.stopPropagation();
-    }, { passive: true });
-  }
+  }  
 });
 
 moveComet();
@@ -134,3 +131,41 @@ if (window.visualViewport) {
         updateViewportHeight
     );
 }
+
+function formatICSDate(date) {
+    return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+}
+
+function createCalendarEvent() {
+
+    const start = new Date(WEDDING.date);
+    const end = new Date(WEDDING.endDate);
+
+    const ics =
+`BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:${WEDDING.title}
+DESCRIPTION:${WEDDING.description}
+LOCATION:${WEDDING.location}
+DTSTART:${formatICSDate(start)}
+DTEND:${formatICSDate(end)}
+END:VEVENT
+END:VCALENDAR`;
+
+    const blob = new Blob([ics], { type: 'text/calendar' });
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Fasil-Hisana-Wedding.ics';
+    a.click();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+document.getElementById('calendar-link').addEventListener('click', e => {
+        e.preventDefault();
+        createCalendarEvent();
+    });
