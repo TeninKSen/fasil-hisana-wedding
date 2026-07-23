@@ -266,7 +266,7 @@ footer i {
 }
 
 .scroll-hint {
-  margin: 40px 0 0;
+  margin: 25px 0 20px;
   text-transform: uppercase;
   font-size: clamp(10px, 3vw, 15px);
   letter-spacing: 0.2em;
@@ -274,7 +274,8 @@ footer i {
 
 .scroll-hint span {
   display: block;
-  margin-top: 11px;
+  margin-top: 3px;
+  margin-bottom: 25px;
   font-size: 16px;
   animation: bob 1.8s infinite;
 }
@@ -401,7 +402,7 @@ footer i {
 }
 
 .venue-address {
-  margin: 17px 0 28px;  
+  margin: 17px 0 18px;  
   font-size: clamp(22px, 6vw, 32px);
   font-weight: 500;
   letter-spacing: 0.22em;
@@ -415,25 +416,42 @@ footer i {
 
 .map-button {
   align-self: center;
-  display: inline-block;
+  display: inline-flex;
   padding: 10px 22px;
   border: 1px solid rgba(255, 255, 255, 0.35);  
   border-radius: 99px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   animation: dynamicPulse 2.2s infinite ease-in-out;
   backdrop-filter: blur(4px);
-  color: #fffbed;
+  color: var(--gold);
   text-decoration: none;
   text-transform: uppercase;
   font-size: clamp(13px, 2.5vw, 15px);
   font-weight: 600;
   letter-spacing: 0.2em;
+  align-items: center;
+  justify-content: center;  
+}
+
+.button-icon {
+    font-size: 20px;
+    line-height: 1;    
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
 }
  
 
 .map-button span {
   font-size: 15px;
   margin-left: 8px;
+}
+
+.map-button .material-symbols-rounded {
+    color: inherit !important;
+    font-size: 20px;
 }
 
 footer {
@@ -476,7 +494,7 @@ footer small {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 5px;
+  padding: 7px 7px;
   border: 1px solid rgba(255, 250, 231, 0.65);
   border-radius: 99px;
   background: rgba(37, 94, 127, 0.37);
@@ -488,11 +506,16 @@ footer small {
 }
 
 .music-button span {
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .music-button.playing span {
   animation: pulse 1s infinite;
+}
+
+.material-symbols-rounded {
+    font-size: 22px;
+    color: white;
 }
 
 @keyframes pulse {

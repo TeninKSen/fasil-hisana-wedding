@@ -14,15 +14,25 @@ const music = document.querySelector('#background-music');
 const musicButton = document.querySelector('#music-button');
 let opened = false;
 
+const icon = document.querySelector(".music-icon");
+if (music.paused) {
+    icon.textContent = "music_off";
+} else {
+    icon.textContent = "music_note";
+}
+
 async function playMusic() {
-  try {
-    await music.play();
-    musicButton.classList.add('playing');
-    musicButton.setAttribute('aria-pressed', 'true');
-    musicButton.querySelector('t').textContent = '🔇';
-  } catch {
-    musicButton.querySelector('t').textContent = '🔈';
-  }
+    try {
+        await music.play();
+
+        musicButton.classList.add('playing');
+        musicButton.setAttribute('aria-pressed', 'true');
+
+        icon.textContent = "music_note";
+
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 function openInvitation() {
@@ -54,14 +64,21 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 
 musicButton.addEventListener('click', async () => {
-  if (music.paused) {
-    await playMusic();
-  } else {
-    music.pause();
-    musicButton.classList.remove('playing');
-    musicButton.setAttribute('aria-pressed', 'false');
-    musicButton.querySelector('t').textContent = '🔈';
-  }
+
+    if (music.paused) {
+
+        await playMusic();
+
+    } else {
+
+        music.pause();
+
+        musicButton.classList.remove('playing');
+        musicButton.setAttribute('aria-pressed', 'false');
+
+        icon.textContent = "music_off";
+    }
+
 });
 
 const observer = new IntersectionObserver(entries => entries.forEach(entry => {

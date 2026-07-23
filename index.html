@@ -12,7 +12,8 @@
     <meta name="theme-color" content="#66abda" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="twitter:card" content="summary_large_image" />    
+    <meta name="twitter:card" content="summary_large_image" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />   
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=Italiana&family=Fleur+De+Leah&family=Moon+Dance&family=Bilbo&family=Tangerine:wght@400;700&family=Charm:wght@400&family=Noto+Serif+KR:wght@200..900&family=Felipa&display=swap" rel="stylesheet" />    
@@ -57,7 +58,12 @@
           <p class="eyebrow">Save this day</p>
           <div class="date-line"><span>Saturday</span><strong>29</strong><span>August<br />2026</span></div>
           <p class="time">4 P.M. Onwards</p>
-         <a class="map-button" id="calendar-link" href="#">Add to Calendar 📅</a>
+         <a class="map-button" id="calendar-link" href="#">
+    <span>Add to Calendar</span>
+    <span class="material-symbols-rounded button-icon">
+        calendar_add_on
+    </span>    
+</a>
         </section> 
 
 	     	      
@@ -66,7 +72,10 @@
           <p class="eyebrow">Where our story unfolds</p>
           <h2>Grand View Convention Center</h2>
           <p class="venue-address">Chattipparamba<br>Malappuram</p>
-          <a class="map-button" id="map-link" href="#" target="_blank" rel="noopener">View location 🧭</a>
+          <a class="map-button" id="map-link" href="#" target="_blank" rel="noopener"><span>View Location</span>
+    <span class="material-symbols-rounded button-icon">
+        location_on
+    </span></a>
         </section>    
 
 	<section class="countdown-section content-block reveal">
@@ -86,7 +95,12 @@
       </div>
     </main>
 
-    <button class="music-button" id="music-button" type="button" aria-label="Play background music" aria-pressed="false"><t>🔈</t></button>
+   <button class="music-button" id="music-button">
+    <span class="material-symbols-rounded music-icon">
+        music_note
+    </span>
+</button>
+
     <audio id="background-music" loop preload="none"><source src="assets/background-music.mp3" type="audio/mpeg" /></audio>
     <script src="script.js"></script>
   </body>
