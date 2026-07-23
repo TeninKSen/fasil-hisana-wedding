@@ -13,6 +13,7 @@ const invitation = document.querySelector('#invitation');
 const music = document.querySelector('#background-music');
 const musicButton = document.querySelector('#music-button');
 let opened = false;
+let wasPlayingBeforeHidden = false;
 
 const icon = document.querySelector(".music-icon");
 if (music.paused) {
@@ -79,6 +80,48 @@ musicButton.addEventListener('click', async () => {
         icon.textContent = "music_off";
     }
 
+});
+
+document.addEventListener("visibilitychange", async () => {
+
+    if (document.hidden) {
+
+        // Remember if music was playing
+        wasPlayingBeforeHidden = !music.paused;
+
+        if (wasPlayingBeforeHidden) {
+            music.pause();
+        }
+
+    } else {
+
+        // Resume only if the user hadn't paused it manually
+        if (wasPlayingBeforeHidden) {
+            try {
+                await music.play();
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    }
+
+    updateMusicIcon();
+
+});
+
+window.addEventListener("pagehide", () => {
+    wasPlayingBeforeHidden = !music.paused;
+    music.pause();
+    updateMusicIcon();
+});
+
+window.addEventListener("pageshow", async () => {
+    if (wasPlayingBeforeHidden) {
+        try {
+            await music.play();
+        } catch (err) {}
+    }
+    updateMusicIcon();
 });
 
 const observer = new IntersectionObserver(entries => entries.forEach(entry => {
